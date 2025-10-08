@@ -19,41 +19,41 @@ The following software is required to compile and run the code (mentioned versio
 All the SpGEMM implementations use `hashtable` as the sparse accumulator.
 
 ### SpGEMM Kernels
-*hash_mult.h*: Row-wise SpGEMM implementation.
-*hash_mult_flengthcluster.h*: Fixed-length cluster-wise SpGEMM implementation.
-*hash_mult_vlengthcluster.h*: Variable-length cluster-wise SpGEMM implementation.
+- *hash_mult.h*: Row-wise SpGEMM implementation.
+- *hash_mult_flengthcluster.h*: Fixed-length cluster-wise SpGEMM implementation.
+- *hash_mult_vlengthcluster.h*: Variable-length cluster-wise SpGEMM implementation.
 
 ### Data structure
-*CSC.h*: Compressed Sparse Column format implementation
-*CSR.h*: Compressed Sparse Row format implementation
-*CSR_FlengthCluster.h*: `CSR_Cluster` format implementation for fixed-length clusters
-*CSR_VlengthCluster.h*: `CSR_Cluster` format implementation for variable-length clusters
-*BIN.h*: the data structure for managing load balance in row-wise SpGEMM
-*BIN_FlengthCluster.h*: the data structure for managing load balance in fixed-length cluster-wise SpGEMM
-*BIN_VlengthCluster.h*: the data structure for managing load balance in variable-length cluster-wise SpGEMM
+- *CSC.h*: Compressed Sparse Column format implementation
+- *CSR.h*: Compressed Sparse Row format implementation
+- *CSR_FlengthCluster.h*: `CSR_Cluster` format implementation for fixed-length clusters
+- *CSR_VlengthCluster.h*: `CSR_Cluster` format implementation for variable-length clusters
+- *BIN.h*: the data structure for managing load balance in row-wise SpGEMM
+- *BIN_FlengthCluster.h*: the data structure for managing load balance in fixed-length cluster-wise SpGEMM
+- *BIN_VlengthCluster.h*: the data structure for managing load balance in variable-length cluster-wise SpGEMM
 
 ### Sample codes
 *Files under `sample` directory*: Sample codes with main function reading matrix data files, and then compute SpGEMM.
 
 | **Implementation**            | **Description**                                                     | **Input Parameter**                                                                          |
 |-------------------------------|---------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| RowSpGEMM                     | Row-wise SpGEMM                                                     | text <matrix-A> <matrix-B>                                                                   |
-| ReorderedRowSpGEMM            | Row-wise SpGEMM (with reordering)                                   | text <matrix-A> <row-ordering of matrix-A>                                                   |
-| FlengthClusterSpGEMM          | Fixed-length cluster-wise SpGEMM                                    | text <matrix-A> <matrix-B>                                                                   |
-| ReorderedFlengthClusterSpGEMM | Fixed-length cluster-wise SpGEMM (with reordering)                  | text <matrix-A> <row-ordering of matrix-A>                                                   |
-| VlengthClusterSpGEMM          | Variable-length cluster-wise SpGEMM                                 | text <matrix-A> <matrix-B>                                                                   |
-| ReorderedVlengthClusterSpGEMM | Variable-length cluster-wise SpGEMM (with reordering)               | text <matrix-A> <row-ordering of matrix-A>                                                   |
-| HierarchicalClusterSpGEMM     | Hierarchical cluster-wise SpGEMM                                    | text <matrix-A> <matrix-B> <candidate close-pairs in matrix-A>                               |
-| tsRowSpGEMM                   | Row-wise SpGEMM for tall-skinny matrix                              | text <matrix-A> <directory path of tall-skinny matrix-B>                                     |
-| tsReorderedRowSpGEMM          | Row-wise SpGEMM (with reordering) for tall-skinny matrix            | text <matrix-A> <row-ordering of matrix-A> <directory path of tall-skinny matrix-B>          |
-| tsHierarchicalClusterSpGEMM   | Hierarchical cluster-wise SpGEMM for tall-skinny matrix             | text <matrix-A> <directory path of tall-skinny matrix-B> <candidate close-pairs in matrix-A> |
+| RowSpGEMM                     | Row-wise SpGEMM                                                     | `text <matrix-A> <matrix-B>`                                                                   |
+| ReorderedRowSpGEMM            | Row-wise SpGEMM (with reordering)                                   | `text <matrix-A> <row-ordering of matrix-A>`                                                   |
+| FlengthClusterSpGEMM          | Fixed-length cluster-wise SpGEMM                                    | `text <matrix-A> <matrix-B>`                                                                   |
+| ReorderedFlengthClusterSpGEMM | Fixed-length cluster-wise SpGEMM (with reordering)                  | `text <matrix-A> <row-ordering of matrix-A>`                                                   |
+| VlengthClusterSpGEMM          | Variable-length cluster-wise SpGEMM                                 | `text <matrix-A> <matrix-B>`                                                                   |
+| ReorderedVlengthClusterSpGEMM | Variable-length cluster-wise SpGEMM (with reordering)               | `text <matrix-A> <row-ordering of matrix-A>`                                                   |
+| HierarchicalClusterSpGEMM     | Hierarchical cluster-wise SpGEMM                                    | `text <matrix-A> <matrix-B> <candidate close-pairs in matrix-A>`                               |
+| tsRowSpGEMM                   | Row-wise SpGEMM for tall-skinny matrix                              | `text <matrix-A> <directory path of tall-skinny matrix-B>`                                     |
+| tsReorderedRowSpGEMM          | Row-wise SpGEMM (with reordering) for tall-skinny matrix            | `text <matrix-A> <row-ordering of matrix-A> <directory path of tall-skinny matrix-B>`          |
+| tsHierarchicalClusterSpGEMM   | Hierarchical cluster-wise SpGEMM for tall-skinny matrix             | `text <matrix-A> <directory path of tall-skinny matrix-B> <candidate close-pairs in matrix-A>` |
 
 Two utility codes are also placed in the `sample` directory. These code is used to generate candidate close-pairs and randomly shuffle the row-ids of an input matrix.
 
 | **Implementation**            | **Description**                                                     | **Input Parameter**                                                                          |
 |-------------------------------|---------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| GenerateCandidatePairs        | Candidate close-pair generator using AxA<sup>T (keep top-k per-row) | text <matrix-A> <matrix-A> <top-k> -s                                                        |
-| ShuffleRowIDs                 | Randomly shuffling the row-ids of a input matrix                    | text <matrix-A> -s                                                                           |
+| GenerateCandidatePairs        | Candidate close-pair generator using AxA<sup>T</sup> (keep top-k per-row) | `text <matrix-A> <matrix-A> <top-k> -s`                                                        |
+| ShuffleRowIDs                 | Randomly shuffling the row-ids of a input matrix                          | `text <matrix-A> -s`                                                                           |
 
 ### Performance Tip
 We recommend configuring your environment for OpenMP based on your hardware by setting the environment variables, including but not limited to `OMP_NUM_THREADS`, `OMP_PROC_BIND`, and `OMP_PLACES`.
@@ -78,12 +78,12 @@ Copy all the header files (*.h) in this directory to your program. Below is an e
 
 > cd $CLUSTERWISE_ROOT
 ```
-###Build the code:
+### Build the code:
 Before compiling the code, first modify the `makefile` with correct path to Intel Compiler.
 ```
 > make clean && make sample_hw
 ```
-###Get the datasets:
+### Get the datasets:
 If you haven’t downloaded the datasets yet, visit [reordering-spgemm](https://github.com/PASSIONLab/reordering-spgemm) for instructions on downloading them and generating different matrix reorderings.
 
 ```
@@ -110,7 +110,7 @@ Validate if all the reordering paths are correctly set in the environment.
 > export SLASHBURN_DATA_PATH=$DATA_PATH/reordering/slashburn_order
 ```
 
-###Run benchmark on row-wise SpGEMM:
+### Run benchmark on row-wise SpGEMM:
 ```
 > sh scripts/rowwise/1_rowwise_original.sh > scripts/rowwise/1_rowwise_original.out
 > sh scripts/rowwise/2_rowwise_random.sh > scripts/rowwise/2_rowwise_random.out
@@ -125,7 +125,7 @@ Validate if all the reordering paths are correctly set in the environment.
 > sh scripts/rowwise/11_rowwise_slashburn.sh > scripts/rowwise/11_rowwise_slashburn.out
 ```
 
-###Run benchmark on fixed-length cluster-wise SpGEMM:
+### Run benchmark on fixed-length cluster-wise SpGEMM:
 ```
 > sh scripts/flength_clusterwise/1_flength_original.sh > scripts/flength_clusterwise/1_flength_original.out
 > sh scripts/flength_clusterwise/2_flength_random.sh > scripts/flength_clusterwise/2_flength_random.out
@@ -140,7 +140,7 @@ Validate if all the reordering paths are correctly set in the environment.
 > sh scripts/flength_clusterwise/11_flength_slashburn.sh > scripts/flength_clusterwise/11_flength_slashburn.out
 ```
 
-###Run benchmark on variable-length cluster-wise SpGEMM:
+### Run benchmark on variable-length cluster-wise SpGEMM:
 ```
 > sh scripts/vlength_clusterwise/1_vlength_original.sh > scripts/vlength_clusterwise/1_vlength_original.out
 > sh scripts/vlength_clusterwise/2_vlength_random.sh > scripts/vlength_clusterwise/2_vlength_random.out
@@ -155,21 +155,21 @@ Validate if all the reordering paths are correctly set in the environment.
 > sh scripts/vlength_clusterwise/11_vlength_slashburn.sh > scripts/vlength_clusterwise/11_vlength_slashburn.out
 ```
 
-###Generate candidate close-pairs for hierarchical cluster-wise SpGEMM:
+### Generate candidate close-pairs for hierarchical cluster-wise SpGEMM:
 ```
 > export CLOSE_PAIR_DATA_PATH=$DATA_PATH/reordering/close_pairs
 > mkdir -p $CLOSE_PAIR_DATA_PATH
 > sh scripts/h_clusterwise/1_generate_close_pairs.sh > scripts/h_clusterwise/1_generate_close_pairs.out
 ```
-###Run benchmark on hierarchical cluster-wise SpGEMM:
+### Run benchmark on hierarchical cluster-wise SpGEMM:
 ```
 > sh scripts/h_clusterwise/2_hierarchical_spgemm.sh > scripts/h_clusterwise/2_hierarchical_spgemm.out
 ```
 
-###Run benchmark on Tall-skinny matrices:
+### Run benchmark on Tall-skinny matrices:
 If the tall-skinny matrices haven’t been generated yet, follow the steps below to produce them from the BC frontiers output by CombBLAS.
 
-####Tall-skinny Row-wise SpGEMM:
+#### Tall-skinny Row-wise SpGEMM:
 ```
 > sh scripts/tall_skinny/rowwise/1_ts_original.sh > scripts/tall_skinny/rowwise/1_ts_original.out
 > sh scripts/tall_skinny/rowwise/2_ts_random.sh > scripts/tall_skinny/rowwise/2_ts_random.out
@@ -184,12 +184,12 @@ If the tall-skinny matrices haven’t been generated yet, follow the steps below
 > sh scripts/tall_skinny/rowwise/11_ts_slashburn.sh > scripts/tall_skinny/rowwise/11_ts_slashburn.out
 ```
 
-####Tall-skinny Cluster-wise SpGEMM:
+#### Tall-skinny Cluster-wise SpGEMM:
 ```
 > sh scripts/tall_skinny/h_clusterwise/1_ts_hierarchical_spgemm.sh > sh scripts/tall_skinny/h_clusterwise/1_ts_hierarchical_spgemm.out
 ```
 
-##Generating Tall-skinny Matrix
+## Generating Tall-skinny Matrix
 In our experiments, we generate the tall-skinny matrices from BFS frontiers produced by [CombBLAS](https://github.com/PASSIONLab/CombBLAS) during Betweenness Centrality (BC) computations. As the number of frontiers varies among datasets, we only take the first 10 forward frontier matrices.
 
 Here is the example code to add in the [CombBLAS/Applications/BetwCent.cpp](https://github.com/PASSIONLab/CombBLAS/blob/master/Applications/BetwCent.cpp) to save the first 10 forward frontiers:
